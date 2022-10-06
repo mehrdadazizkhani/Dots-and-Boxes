@@ -1,0 +1,90 @@
+:root {
+    --background-color: bisque;
+    --primary-color: blue;
+    --secondary-color: yellow;
+
+    --player1-color:;
+    --player2-color:;
+
+    --grid-width:;
+    --grid-height:;
+
+    --rows: 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh;
+    --columns: 0.5vh 5vh 0.5vh 5vh 0.5vh;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.score-board {
+    display: flex;
+    width: 100vw;
+    height: 80px;
+    background-color: green;
+    justify-content: space-between;
+}
+
+.game-board {
+    display: flex;  
+    width: 100%;
+    height: calc(100vh - 160px);
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+.game-grid-container {
+    display: grid;
+    width: calc(90vh - 160px);
+    aspect-ratio: 1/1;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: var(--rows);
+    grid-template-rows: var(--columns);
+}
+
+.options {
+    display: flex;
+    bottom: 0;
+    height: 80px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: blueviolet;
+}
+
+.option-buttons {
+    text-transform: uppercase;
+    width: 50%;
+    height: 100%;
+}
+
+.game-setup {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#dot {
+    background-color: black;
+    border-radius: 50%;
+    margin: 0.5px;
+}
+
+#line {
+    background-color: var(--background-color);
+    margin: 0.5px;
+}
+
+#box {
+    background-color: var(--background-color);
+    margin: 0.5px;
+}
