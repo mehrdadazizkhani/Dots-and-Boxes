@@ -1,19 +1,24 @@
 :root {
     --background-color: bisque;
-    --primary-color: blue;
+    --primary-color: gray;
     --secondary-color: yellow;
 
     --player1-color:;
     --player2-color:;
+    --hover-color:;
+    --font-size:;
 
     --grid-width:;
     --grid-height:;
+
+    --line-border-radius:;
 
     --rows: 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh;
     --columns: 0.5vh 5vh 0.5vh 5vh 0.5vh;
 }
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -38,12 +43,11 @@ body {
 
 .game-grid-container {
     display: grid;
-    width: calc(90vh - 160px);
-    aspect-ratio: 1/1;
+    height: calc(90vh - 160px);
     justify-content: center;
     align-content: center;
-    grid-template-columns: var(--rows);
-    grid-template-rows: var(--columns);
+    grid-template-columns: var(--columns);
+    grid-template-rows: var(--rows);
 }
 
 .options {
@@ -73,18 +77,52 @@ body {
     align-items: center;
 }
 
-#dot {
+.dot {
     background-color: black;
     border-radius: 50%;
     margin: 0.5px;
 }
 
-#line {
+.line {
+    border-radius: var(--line-border-radius);
+    background-color: var(--background-color);
+    margin: 0.5px;
+    border: solid var(--background-color) calc(var(--line-border-radius) / 2);
+    transition: all 0.5s;
+}
+
+.line:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+}
+
+.box {
     background-color: var(--background-color);
     margin: 0.5px;
 }
 
-#box {
-    background-color: var(--background-color);
+.player1-bg-color {
+    border-radius: var(--line-border-radius);
+    background-color: var(--player1-color);
+    border: solid var(--background-color) calc(var(--line-border-radius) / 2);
     margin: 0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--background-color);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.player2-bg-color {
+    border-radius: var(--line-border-radius);
+    background-color: var(--player2-color);
+    border: solid var(--background-color) calc(var(--line-border-radius) / 2);
+    margin: 0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--background-color);
+    text-transform: uppercase;
+    font-weight: bold;
 }
