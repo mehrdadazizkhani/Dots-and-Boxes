@@ -30,7 +30,8 @@ let numberOfLines
 
 let player1Points = 0
 let player2Points = 0
- 
+
+reset.addEventListener("click", startHandler)
 mainMenu.addEventListener("click", setupHandler)
 function setupHandler () {
     gameSetup.style.display = "flex"
@@ -47,8 +48,6 @@ function startHandler () {
     numberOfColumns = Number(columns.value)
     player1Name.value ? playerA.innerText = player1Name.value : playerA.innerText = "Player 1"
     player2Name.value ? playerB.innerText = player2Name.value : playerB.innerText = "Player 2"
-    player1Name.value = ""
-    player2Name.value = ""
     player1Points = 0
     player2Points = 0
     playerAScore.innerText = player1Points
@@ -57,6 +56,8 @@ function startHandler () {
     gameGridGenerator()
     numberOfLines = ((numberOfRows + 1) * numberOfColumns) + ((numberOfColumns + 1) * numberOfRows)
     playerTurn = true
+    reset.innerText = "reset"
+    gameStatus.innerText = `${playerA.innerText}'s turn`
 }
 
 
@@ -123,9 +124,21 @@ clickHandler = (event) => {
     }
     playerTurn = !playerTurn
     winCondition()
+    playerTurn ? gameStatus.innerText = `${playerA.innerText}'s turn` : gameStatus.innerText = `${playerB.innerText}'s turn`
     playerTurn ? root.style.setProperty("--hover-color", player1Color.value) : root.style.setProperty("--hover-color", player2Color.value)
     playerAScore.innerText = player1Points
     playerBScore.innerText = player2Points
+
+   if (numberOfLines <= 0) {
+    reset.innerText = "new game"
+    if (player1Points > player2Points) {
+        gameStatus.innerText = `${playerA.innerText} won the game`
+    } else if (player1Points < player2Points) {
+        gameStatus.innerText = `${playerB.innerText} won the game`
+    } else {
+        gameStatus.innerText = "Draw"
+    }
+   }
 }
 
 isSelected = (line) => {
@@ -138,6 +151,7 @@ isSelected = (line) => {
 
 winCondition = () => {
     boxContainer = document.querySelectorAll(".box")
+    numberOfBoxes = boxContainer.length
     boxContainer.forEach(element => {
         const boxElement = element.id.split("-")
         if (
@@ -150,7 +164,9 @@ winCondition = () => {
             element.innerText = playerTurn ? playerB.innerText : playerA.innerText
             playerTurn ? player2Points++ : player1Points++
             element.classList.remove("box")
-            playerTurn ? playerTurn = true : playerTurn = false
         }
     });
+    newBoxes = document.querySelectorAll(".box")
+    numberOfBoxes > newBoxes.length ? playerTurn = !playerTurn : playerTurn = playerTurn
+    
 }
