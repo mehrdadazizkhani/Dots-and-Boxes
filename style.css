@@ -1,7 +1,7 @@
 :root {
-    --background-color: bisque;
+    --background-color: #222222;
     --primary-color: gray;
-    --secondary-color: yellow;
+    --secondary-color: #999999;
 
     --player1-color:;
     --player2-color:;
@@ -22,14 +22,19 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: var(--secondary-color);
 }
 
 .score-board {
     display: flex;
+    align-items: center;
     width: 100vw;
     height: 80px;
-    background-color: green;
-    justify-content: space-between;
+    background-color: var(--secondary-color);
+    justify-content: space-around;
+    color: var(--background-color);
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .game-board {
@@ -56,13 +61,17 @@ body {
     height: 80px;
     justify-content: space-around;
     align-items: center;
-    background-color: blueviolet;
+    background-color: var(--background-color);
 }
 
 .option-buttons {
     text-transform: uppercase;
     width: 50%;
     height: 100%;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
 }
 
 .game-setup {
@@ -70,7 +79,7 @@ body {
     top: 0;
     height: 100vh;
     width: 100vw;
-    background-color: bisque;
+    background-color: var(--background-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,7 +87,7 @@ body {
 }
 
 .dot {
-    background-color: black;
+    background-color: var(--secondary-color);
     border-radius: 50%;
     margin: 0.5px;
 }
@@ -112,9 +121,11 @@ body {
     color: var(--background-color);
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 80%;
 }
 
 .player2-bg-color {
+    font-size: 80%;
     border-radius: var(--line-border-radius);
     background-color: var(--player2-color);
     border: solid var(--background-color) calc(var(--line-border-radius) / 2);
@@ -124,5 +135,26 @@ body {
     align-items: center;
     color: var(--background-color);
     text-transform: uppercase;
+    font-weight: bold;
+}
+
+.input {
+    width: 500px;
+    margin: 10px 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+}
+
+.submit {
+    text-transform: uppercase;
+    background-color: var(--secondary-color);
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--background-color);
     font-weight: bold;
 }
