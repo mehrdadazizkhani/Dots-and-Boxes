@@ -1,31 +1,31 @@
 :root {
     --background-color: #222222;
-    --primary-color: gray;
     --secondary-color: #999999;
 
     --player1-color:;
     --player2-color:;
     --hover-color:;
-    --font-size:;
-
-    --grid-width:;
-    --grid-height:;
 
     --line-border-radius:;
+    --font-size:;
 
     --rows: 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh 5vh 0.5vh;
     --columns: 0.5vh 5vh 0.5vh 5vh 0.5vh;
 }
 
 body {
+    z-index: 2;
+    background-color: var(--background-color);
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: var(--secondary-color);
+    overflow: hidden;
 }
 
 .score-board {
+    position: fixed;
     display: flex;
     align-items: center;
     width: 100vw;
@@ -35,28 +35,32 @@ body {
     color: var(--background-color);
     text-transform: uppercase;
     font-weight: bold;
+
 }
 
 .game-board {
+    z-index: -2;
     display: flex;  
     width: 100%;
-    height: calc(100vh - 160px);
+    height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: var(--background-color);
+    font-size: var(--font-size);
 }
 
 .game-grid-container {
     display: grid;
-    height: calc(90vh - 160px);
     justify-content: center;
     align-content: center;
     grid-template-columns: var(--columns);
     grid-template-rows: var(--rows);
+    transition: all 2s ease-out;
 }
 
 .options {
+    position: fixed;
     display: flex;
+    width: 100vw;
     bottom: 0;
     height: 80px;
     justify-content: space-around;
@@ -72,6 +76,7 @@ body {
     border-radius: 10px;
     background-color: var(--secondary-color);
     color: var(--background-color);
+    cursor: pointer;
 }
 
 .game-setup {
@@ -84,6 +89,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 10;
 }
 
 .dot {
@@ -93,8 +99,8 @@ body {
 }
 
 .line {
+    background-color: #282828;
     border-radius: var(--line-border-radius);
-    background-color: var(--background-color);
     margin: 0.5px;
     border: solid var(--background-color) calc(var(--line-border-radius) / 2);
     transition: all 0.5s;
@@ -106,11 +112,13 @@ body {
 }
 
 .box {
-    background-color: var(--background-color);
+    background-color: #282828;
     margin: 0.5px;
+    border-radius: var(--line-border-radius);
 }
 
 .player1-bg-color {
+    font-size: var(--font-size);
     border-radius: var(--line-border-radius);
     background-color: var(--player1-color);
     border: solid var(--background-color) calc(var(--line-border-radius) / 2);
@@ -121,11 +129,11 @@ body {
     color: var(--background-color);
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 80%;
+    transition: font-size 2s ease-out;
 }
 
 .player2-bg-color {
-    font-size: 80%;
+    font-size: var(--font-size);
     border-radius: var(--line-border-radius);
     background-color: var(--player2-color);
     border: solid var(--background-color) calc(var(--line-border-radius) / 2);
@@ -136,6 +144,7 @@ body {
     color: var(--background-color);
     text-transform: uppercase;
     font-weight: bold;
+    transition: font-size 2s ease-out;
 }
 
 .input {
@@ -148,6 +157,7 @@ body {
 }
 
 .submit {
+    cursor: pointer;
     text-transform: uppercase;
     background-color: var(--secondary-color);
     height: 50px;
@@ -158,3 +168,4 @@ body {
     color: var(--background-color);
     font-weight: bold;
 }
+

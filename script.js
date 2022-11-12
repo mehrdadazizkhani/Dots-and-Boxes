@@ -6,6 +6,7 @@ const gameStatus = document.querySelector('.game-status')
 const playerBScore = document.querySelector('.player-b-score')
 const playerB = document.querySelector('.player-b')
 
+const gameBoard = document.querySelector('.game-board')
 const gameGridContainer = document.querySelector('.game-grid-container')
 
 const reset = document.querySelector('.reset')
@@ -20,16 +21,26 @@ const rows = document.getElementById('rows')
 const columns = document.getElementById('cols')
 const start = document.querySelector('.submit')
 
+
+
 let lineContainer
 let boxContainer
 let numberOfRows
 let numberOfColumns
 let windowHeight
+let windowWidth
 let playerTurn = true
 let numberOfLines
 
 let player1Points = 0
 let player2Points = 0
+
+let lineWidth
+let boxWidth
+let rowsGridArray
+let columnsGridArray
+let rowsGridPattern = ""
+let colsGridPattern = ""
 
 reset.addEventListener("click", startHandler)
 mainMenu.addEventListener("click", setupHandler)
@@ -38,8 +49,10 @@ function setupHandler () {
 }
 
 start.addEventListener("click", startHandler)
+
 function startHandler () {
-    windowHeight = gameGridContainer.offsetHeight
+    windowWidth = gameBoard.offsetWidth - 50
+    windowHeight = gameBoard.offsetHeight - 210
     gameSetup.style.display = "none"
     root.style.setProperty("--player1-color", player1Color.value)
     root.style.setProperty("--player2-color", player2Color.value)
@@ -61,22 +74,10 @@ function startHandler () {
 }
 
 
-const gameGridGenerator = () => {
-    const lineWidth = windowHeight / ((numberOfRows * 10) + numberOfRows + 1)
-    const boxWidth = (windowHeight * 10) / ((numberOfRows * 10) + numberOfRows + 1)
-    const rowsGridArray = Array(numberOfRows*2+1).fill(0).map((_,i) => i)
-    const columnsGridArray = Array(numberOfColumns*2+1).fill(0).map((_,i) => i)
-    let rowsGridPattern = ""
-    let colsGridPattern = ""
-    rowsGridArray.forEach(i => i % 2 == 0 ? rowsGridPattern += `${lineWidth}px ` : rowsGridPattern += `${boxWidth}px `)
-    columnsGridArray.forEach(i => i % 2 == 0 ? colsGridPattern += `${lineWidth}px ` : colsGridPattern += `${boxWidth}px `)
-    root.style.setProperty("--rows", rowsGridPattern)
-    root.style.setProperty("--columns", colsGridPattern)
+gameGridGenerator = () => {
 
-    root.style.setProperty("--font-size", `${boxWidth}px`)
-    root.style.setProperty("--line-border-radius", `${lineWidth/2}px`)
-
-
+    adjustGrid()
+    
     for (let i = 0; i < rowsGridArray.length; i++) {
         if (i % 2 == 0) {
             for (let j = 0; j < columnsGridArray.length; j++) {
@@ -112,7 +113,41 @@ const gameGridGenerator = () => {
     lineContainer.forEach(i => i.addEventListener("click", clickHandler))
 }
 
+adjustGrid = () => {
 
+    lineWidthCalculator()
+
+    rowsGridArray = Array(numberOfRows*2+1).fill(0).map((_,i) => i)
+    columnsGridArray = Array(numberOfColumns*2+1).fill(0).map((_,i) => i)
+
+    rowsGridPattern = ""
+    colsGridPattern = ""
+    
+    rowsGridArray.forEach(i => i % 2 == 0 ? rowsGridPattern += `${lineWidth}px ` : rowsGridPattern += `${boxWidth}px `)
+    columnsGridArray.forEach(i => i % 2 == 0 ? colsGridPattern += `${lineWidth}px ` : colsGridPattern += `${boxWidth}px `)
+    root.style.setProperty("--rows", rowsGridPattern)
+    root.style.setProperty("--columns", colsGridPattern)
+
+    root.style.setProperty("--font-size", `${boxWidth/8}px`)
+    root.style.setProperty("--line-border-radius", `${lineWidth/2}px`)
+}
+
+lineWidthCalculator = () => {
+    const lineWidthX = windowHeight / ((numberOfRows * 10) + numberOfRows + 1)
+    const boxWidthX = (windowHeight * 10) / ((numberOfRows * 10) + numberOfRows + 1)    
+    const lineWidthY = windowWidth / ((numberOfColumns * 10) + numberOfColumns + 1)
+    const boxWidthY = (windowWidth * 10) / ((numberOfColumns * 10) + numberOfColumns + 1)
+
+
+
+    if (windowHeight / windowWidth <= numberOfRows / numberOfColumns) {
+        lineWidth = lineWidthX
+        boxWidth = boxWidthX
+    } else {
+        lineWidth = lineWidthY
+        boxWidth = boxWidthY
+    }
+}
 
 
 clickHandler = (event) => {
@@ -170,3 +205,17 @@ winCondition = () => {
     numberOfBoxes > newBoxes.length ? playerTurn = !playerTurn : playerTurn = playerTurn
     
 }
+
+
+
+
+resizer = () => {
+    windowWidth = gameBoard.offsetWidth - 50
+    windowHeight = gameBoard.offsetHeight - 210
+    adjustGrid()
+    console.log(gameGridContainer.offsetHeight)
+    console.log(windowHeight)
+    console.log(windowHeight < gameGridContainer.offsetHeight)
+}
+
+addEventListener("resize", resizer)
