@@ -12,6 +12,9 @@ const gameGridContainer = document.querySelector('.game-grid-container')
 const reset = document.querySelector('.reset')
 const mainMenu = document.querySelector('.main-menu')
 
+const score = document.querySelector('.score')
+const scoreText = document.querySelector('.score-text')
+
 const gameSetup = document.querySelector('.game-setup')
 const player1Name = document.getElementById('player1')
 const player1Color = document.getElementById('player1-color')
@@ -166,6 +169,9 @@ clickHandler = (event) => {
 
    if (numberOfLines <= 0) {
     reset.innerText = "new game"
+    scoreText.innerText = `${player1Points > player2Points ? playerA.innerText : playerB.innerText} WON THE GAME`
+    root.style.setProperty("--winner-color", player1Points > player2Points ? player1Color.value : player2Color.value)
+    scoreHandler()
     if (player1Points > player2Points) {
         gameStatus.innerText = `${playerA.innerText} won the game`
     } else if (player1Points < player2Points) {
@@ -216,6 +222,23 @@ resizer = () => {
     console.log(gameGridContainer.offsetHeight)
     console.log(windowHeight)
     console.log(windowHeight < gameGridContainer.offsetHeight)
+}
+
+const scoreHandler = () => {
+    score.classList.add("score-active")
+    scoreText.classList.add("score-text-active")
+    reset.removeEventListener("click" ,startHandler)
+    mainMenu.removeEventListener("click" ,setupHandler)
+    setTimeout(() => {
+        scoreClear()
+        reset.addEventListener("click", startHandler)
+        mainMenu.addEventListener("click", setupHandler)
+    }, 5000)
+}
+
+const scoreClear = () => {
+    score.classList.remove("score-active")
+    scoreText.classList.remove("score-text-active")
 }
 
 addEventListener("resize", resizer)

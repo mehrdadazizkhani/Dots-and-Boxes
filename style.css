@@ -5,6 +5,7 @@
     --player1-color:;
     --player2-color:;
     --hover-color:;
+    --winner-color:;
 
     --line-border-radius:;
     --font-size:;
@@ -25,6 +26,7 @@ body {
 }
 
 .score-board {
+    z-index: 2;
     position: fixed;
     display: flex;
     align-items: center;
@@ -58,6 +60,7 @@ body {
 }
 
 .options {
+    z-index: 2;
     position: fixed;
     display: flex;
     width: 100vw;
@@ -169,3 +172,67 @@ body {
     font-weight: bold;
 }
 
+
+.score {
+    z-index: 0;
+    top: 0;
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    transform-origin: center center;
+    transition: all 1s linear;
+    animation: rotate 8s ease-in;
+    background: repeating-conic-gradient(var(--secondary-color) 0deg calc(360/40*1deg), var(--background-color) calc(360/40*1deg) calc(360/40*2*1deg));}
+
+@keyframes rotate {
+    0% {transform: rotate(0deg) scale(5);}
+    100% {transform: rotate(360deg) scale(5);}
+}
+
+.score-active {
+    display: flex;
+}
+
+.score-text {
+    position: fixed;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-size: 7rem;
+    font-family: 'Modak', cursive;
+    color: var(--winner-color);
+    transform-origin: center center;
+    transform: rotate(-10deg);
+    animation: move 1s infinite ease-in-out;
+    -webkit-text-stroke: 5px var(--background-color);
+}
+
+.score-text::before {
+    -webkit-text-stroke: 0.21em black;
+}
+
+@keyframes move {
+    0% {transform: rotate(-10deg);}
+    50% {transform: rotate(10deg);}
+    100% {transform: rotate(-10deg);}
+}
+
+.score-text-active {
+    display: flex;
+}
+
+@media screen and (max-width: 600px) {
+    .input {
+        width: 80%;
+    }
+
+    .score-text {
+        font-size: 4rem;
+    }
+}
