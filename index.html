@@ -26,22 +26,24 @@
     </section>
     <section class="game-setup">
         <fieldset class="input">
-            <label for="player1">player 1</label>
-            <input type="text" id="player1">
+            <label for="player1">Player 1:</label>
+            <input type="text" id="player1" value="Emma">
             <input type="color" value="#fc5858" id="player1-color">
         </fieldset>
-        <span></span>
         <fieldset class="input">
-            <label for="player2">player 2</label>
-            <input type="text" id="player2">
+            <label for="player2">Player 2:</label>
+            <input type="text" id="player2" value="Alexander">
             <input type="color" value="#3a88e0" id="player2-color">
         </fieldset>
-        <span></span>
         <fieldset class="input">
-            <label for="rows">number of rows</label>
-            <input type="number" id="rows" min="2" max="20" placeholder="2" value="7">
-            <label for="cols">number of columns</label>
-            <input type="number" id="cols" min="2" max="20" placeholder="2" value="16">
+            <label for="rows">Number of rows:</label>
+            <span class="row-display">7</span>
+            <input class="range" type="range" id="rows" min="1" max="10" placeholder="2" value="7">
+        </fieldset>
+        <fieldset class="input">
+            <label for="cols">Number of columns:</label>
+            <span class="column-display">20</span>
+            <input class="range" type="range" id="cols" min="1" max="20" placeholder="2" value="16">
         </fieldset>
         <button class="input submit">start game</button>
     </section>

@@ -5,6 +5,9 @@ const playerAScore = document.querySelector('.player-a-score')
 const gameStatus = document.querySelector('.game-status')
 const playerBScore = document.querySelector('.player-b-score')
 const playerB = document.querySelector('.player-b')
+const rowDisplay = document.querySelector('.row-display')
+const colDisplay = document.querySelector('.column-display')
+const range = document.querySelectorAll('.range')
 
 const gameBoard = document.querySelector('.game-board')
 const gameGridContainer = document.querySelector('.game-grid-container')
@@ -24,6 +27,7 @@ const rows = document.getElementById('rows')
 const columns = document.getElementById('cols')
 const start = document.querySelector('.submit')
 
+const winSound = new Audio("./win.mp3")
 
 
 let lineContainer
@@ -45,10 +49,21 @@ let columnsGridArray
 let rowsGridPattern = ""
 let colsGridPattern = ""
 
+
+range.forEach(item => {
+    item.addEventListener("input", (event) => {
+        event.target.id == "rows" ? rowDisplay.innerText = event.target.value : colDisplay.innerText = event.target.value
+    })
+})
 reset.addEventListener("click", startHandler)
 mainMenu.addEventListener("click", setupHandler)
+
 function setupHandler () {
     gameSetup.style.display = "flex"
+}
+
+rowDisplayHandler = (event) => {
+
 }
 
 start.addEventListener("click", startHandler)
@@ -229,6 +244,7 @@ const scoreHandler = () => {
     scoreText.classList.add("score-text-active")
     reset.removeEventListener("click" ,startHandler)
     mainMenu.removeEventListener("click" ,setupHandler)
+    winSound.play()
     setTimeout(() => {
         scoreClear()
         reset.addEventListener("click", startHandler)

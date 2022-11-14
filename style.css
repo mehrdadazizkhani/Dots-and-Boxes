@@ -159,6 +159,18 @@ body {
     border: none;
 }
 
+input[type=text] {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    width: 50%;
+}
+
+input[type="color" i] {
+    background-color: var(--secondary-color);
+}
+
 .submit {
     cursor: pointer;
     text-transform: uppercase;
@@ -172,6 +184,21 @@ body {
     font-weight: bold;
 }
 
+button {
+    border: none;
+    border: var(--background-color) solid 2px;
+    transition: all 0.1s ease-in;
+}
+
+button:hover {
+    background-color: #444444;
+    color: var(--secondary-color);
+}
+
+.game-status {
+    width: 50%;
+    text-align: center;
+}
 
 .score {
     z-index: 0;
@@ -197,6 +224,7 @@ body {
 }
 
 .score-text {
+    text-align: center;
     position: fixed;
     top: 0;
     display: none;
@@ -204,7 +232,7 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
-    font-size: 7rem;
+    font-size: 5rem;
     font-family: 'Modak', cursive;
     color: var(--winner-color);
     transform-origin: center center;
@@ -227,12 +255,30 @@ body {
     display: flex;
 }
 
+.range {
+    width: 50%;
+    height: 10px;
+    -webkit-appearance: none;
+    background: #444444;
+    outline: none;
+    border-radius: 15px;
+}
+.range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--background-color);
+    cursor: pointer;
+    border: 4px solid var(--secondary-color);
+}
+
 @media screen and (max-width: 600px) {
     .input {
         width: 80%;
     }
 
     .score-text {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 }
